@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Anime Template">
+    <meta name="keywords" content="Anime, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Anime | Template</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'web/css/icon_after_login.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/profileBtn.css' %}">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'web/css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'web/css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'web/css/elegant-icons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'web/css/plyr.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'web/css/nice-select.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'web/css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'web/css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'web/css/style.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'web/css/sidebar.css' %}" type="text/css">
+
+    <style>
+        .hidden-anime {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+<!-- Page Preloader -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<!-- Header Section Begin -->
+<header class="header" style="margin-top:5px;">
+    <div class="container">
+        <div class="row align-items-center py-2 bg-grey">
+
+            <!-- Admin Icon -->
+            <a href="{% url 'admin_login_page' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                     fill="currentColor" class="bi bi-android2" viewBox="0 0 16 16">
+                    <path d="m10.213 1.471.691-1.26q.069-.124-.048-.192-.128-.057-.195.058l-.7 1.27A4.8 4.8 0 0 0 8.005.941q-1.032 0-1.956.404l-.7-1.27Q5.281-.037 5.154.02q-.117.069-.049.193l.691 1.259a4.25 4.25 0 0 0-1.673 1.476A3.7 3.7 0 0 0 3.5 5.02h9q0-1.125-.623-2.072a4.27 4.27 0 0 0-1.664-1.476ZM6.22 3.303a.37.37 0 0 1-.267.11.35.35 0 0 1-.263-.11.37.37 0 0 1-.107-.264.37.37 0 0 1 .107-.265.35.35 0 0 1 .263-.11q.155 0 .267.11a.36.36 0 0 1 .112.265.36.36 0 0 1-.112.264m4.101 0a.35.35 0 0 1-.262.11.37.37 0 0 1-.268-.11.36.36 0 0 1-.112-.264q0-.154.112-.265a.37.37 0 0 1 .268-.11q.155 0 .262.11a.37.37 0 0 1 .107.265q0 .153-.107.264M3.5 11.77q0 .441.311.75.311.306.76.307h.758l.01 2.182q0 .414.292.703a.96.96 0 0 0 .7.288.97.97 0 0 0 .71-.288.95.95 0 0 0 .292-.703v-2.182h1.343v2.182q0 .414.292.703a.97.97 0 0 0 .71.288.97.97 0 0 0 .71-.288.95.95 0 0 0 .292-.703v-2.182h.76q.436 0 .749-.308.31-.307.311-.75V5.365h-9zm10.495-6.587a.98.98 0 0 0-.702.278.9.9 0 0 0-.293.685v4.063q0 .406.293.69a.97.97 0 0 0 .702.284q.42 0 .712-.284a.92.92 0 0 0 .293-.69V6.146a.9.9 0 0 0-.293-.685 1 1 0 0 0-.712-.278m-12.702.283a1 1 0 0 1 .712-.283q.41 0 .702.283a.9.9 0 0 1 .293.68v4.063a.93.93 0 0 1-.288.69.97.97 0 0 1-.707.284 1 1 0 0 1-.712-.284.92.92 0 0 1-.293-.69V6.146q0-.396.293-.68"/>
+                </svg>
+            </a>
+
+            <!-- Sidebar toggle -->
+            <div class="col-auto">
+                <div class="menu-toggle sidebars" onclick="toggleSidebar()">&#9776;</div>
+                <div id="sidebar" class="sidebar">
+                    <a href="javascript:void(0)" class="close-btn" onclick="toggleSidebar()">× Close</a>
+                    <a href="{% url 'filter_anime' 'version' 'sub' %}">Subbed Anime</a>
+                    <a href="{% url 'filter_anime' 'version' 'dub' %}">Dubbed Anime</a>
+                    <a href="{% url 'filter_anime' 'type' 'movie' %}">Movies</a>
+                    <a href="{% url 'filter_anime' 'type' 'tv-series' %}">TV Series</a>
+                    <a href="{% url 'filter_anime' 'type' 'ova' %}">OVAs</a>
+                    <a href="{% url 'filter_anime' 'type' 'ona' %}">ONAs</a>
+                </div>
+            </div>
+
+            <!-- Logo -->
+            <div class="col text-center">
+                <a href="{% url 'homepage' %}">
+                    <img src="{% static 'web/img/logo_name.png' %}" alt="Logo" class="img-fluid"
+                         style="max-height:50px;">
+                </a>
+            </div>
+
+            <!-- Profile / Login -->
+            <div class="col-auto align-items-center">
+                {% if request.session.Name %}
+                <div class="profile-container">
+                    <div class="circle" id="profileBtn">
+                        {% if user.Profile_Image %}
+                        <img src="{{ user.Profile_Image.url }}" alt="Profile" class="profile-icon">
+                        {% else %}
+                        <i class="fa fa-user"></i>
+                        {% endif %}
+                    </div>
+                    <div class="profile-dropdown" id="dropdownMenu">
+                        <a href="{% url 'profile_page' %}"><i class="fa fa-user"></i> Profile</a>
+                        <a href="{% url 'watch_list' %}"><i class="fa fa-list"></i> Watch List</a>
+                        <a href="{% url 'user_logout' %}"><i class="fa fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+                {% else %}
+                <a href="{% url 'sign_in' %}" class="ms-2"><span class="icon_profile"></span></a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div id="mobile-menu-wrap"></div>
+    </div>
+</header>
+<!-- Header End -->
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <div class="hero__slider owl-carousel">
+            {% for a in anime %}
+            <div class="hero__items set-bg" data-setbg="{{ a.Image.url }}">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="hero__text">
+                            <h2>{{ a.Eng_Name }}</h2>
+                            <p>{{ a.Description|truncatewords:20 }}</p>
+                            <a href="{% url 'single_anime' anime_id=a.id %}">
+                                <span>Anime Details</span> <i class="fa fa-angle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Product Section -->
+<section class="product spad">
+    <div class="container">
+        <div class="row">
+
+            <!-- Left Content -->
+            <div class="col-lg-8">
+
+                <!-- Recently Added -->
+                <div class="trending__product">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            <div class="section-title"><h4>Recently Added</h4></div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <div class="btn__all">
+                                <button class="btn btn-danger view-all-btn" data-target="recently-added">View All <span
+                                        class="arrow_right"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row recently-added">
+                        {% for a in anime %}
+                        <div class="col-lg-4 col-md-6 col-sm-6 {% if forloop.counter > 6 %}hidden-anime{% endif %}">
+                            <div class="product__item">
+                                <a href="{% url 'single_anime' anime_id=a.id %}">
+                                    <div class="product__item__pic set-bg" data-setbg="{{a.Image.url}}">
+                                        <div class="ep">{{a.Episode}}</div>
+                                        <div class="view"><i class="fa fa-eye"></i> {{a.views}}</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h5 style="color:white;">{{a.Eng_Name}}</h5>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Most Watched -->
+                <div class="popular__product">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            <div class="section-title"><h4>Most Watched</h4></div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <div class="btn__all">
+                                <button class="btn btn-danger view-all-btn" data-target="most-watched">View All <span
+                                        class="arrow_right"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row most-watched">
+                        {% for v in counts %}
+                        <div class="col-lg-4 col-md-6 col-sm-6 {% if forloop.counter > 6 %}hidden-anime{% endif %}">
+                            <div class="product__item">
+                                <a href="{% url 'single_anime' anime_id=v.id %}">
+                                    <div class="product__item__pic set-bg" data-setbg="{{v.Image.url}}">
+                                        <div class="ep">{{v.Episode}}</div>
+                                        <div class="view"><i class="fa fa-eye"></i> {{v.views}}</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h5 style="color:white;">{{v.Eng_Name}}</h5>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Top Rated -->
+                <div class="recent__product">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            <div class="section-title"><h4>Top Rated</h4></div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <div class="btn__all">
+                                <button class="btn btn-danger view-all-btn" data-target="top-rated">View All <span
+                                        class="arrow_right"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row top-rated">
+                        {% for i in rating %}
+                        <div class="col-lg-4 col-md-6 col-sm-6 {% if forloop.counter > 6 %}hidden-anime{% endif %}">
+                            <a href="{% url 'single_anime' anime_id=i.id %}">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="{{i.Image.url}}">
+                                        <div class="ep">{{i.Episode}}</div>
+                                        <div class="view"><i class="fa fa-eye"></i> {{i.views}}</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h5 style="color:white;">{{i.Eng_Name}}</h5>
+                                        <p style="color:white">Ratings : {{ i.avg_rating|floatformat:1 }} ⭐</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="col-lg-4 col-md-6 col-sm-8 mt-1.5">
+                <div class="product__sidebar">
+                    <div class="product__sidebar__view">
+                        <div class="section-title"><h5>Anime You Might Like</h5></div>
+                        <div class="filter__gallery">
+                            {% for i in random_anime %}
+                            <a href="{% url 'single_anime' anime_id=i.id %}" class="d-block mb-3">
+                                <div class="product__sidebar__view__item set-bg mix day years "
+                                     data-setbg="{{i.Image.url}}">
+                                    <div class="ep">{{i.Episode}}</div>
+                                    <div class="view"><i class="fa fa-eye"></i>{{i.views}}</div>
+                                </div>
+                                <h5 class="anime-name text-white">
+                                    {{i.Eng_Name}}
+                                </h5>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <br><br><br><br><br>
+                    <div class="product__sidebar__view">
+                        <div class="section-title"><h5>Random Anime Mix</h5></div>
+                        <div class="filter__gallery">
+                            {% for i in random_animes %}
+                            <div class="product__sidebar__view__item set-bg mix day years" data-setbg="{{i.Image.url}}">
+                                <div class="ep">{{i.Episode}}</div>
+                                <div class="view"><i class="fa fa-eye"></i>{{i.views}}</div>
+                                <h5><a href="{% url 'single_anime' anime_id=i.id %}">{{i.Eng_Name}}</a></h5>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="page-up">
+        <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
+    </div>
+</footer>
+
+<!-- Search Model -->
+<div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch"><i class="icon_close"></i></div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Search here.....">
+        </form>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="{% static 'web/js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'web/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'web/js/player.js' %}"></script>
+<script src="{% static 'web/js/jquery.nice-select.min.js' %}"></script>
+<script src="{% static 'web/js/mixitup.min.js' %}"></script>
+<script src="{% static 'web/js/jquery.slicknav.js' %}"></script>
+<script src="{% static 'web/js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'web/js/main.js' %}"></script>
+
+<script>
+    // Sidebar toggle
+    function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        sidebar.style.width = sidebar.style.width === "250px" ? "0" : "250px";
+    }
+
+    // Profile dropdown
+    document.addEventListener("DOMContentLoaded", function () {
+        const profileBtn = document.getElementById("profileBtn");
+        const dropdownMenu = document.getElementById("dropdownMenu");
+        profileBtn?.addEventListener("click", function (e) {
+            e.stopPropagation();
+            dropdownMenu.classList.toggle("show");
+        });
+        document.addEventListener("click", function () {
+            dropdownMenu?.classList.remove("show");
+        });
+    });
+
+    // Hero slider
+    $(".hero__slider").owlCarousel({
+        items: 1,
+        loop: true,
+        autoplay: true,
+        dots: false,
+        nav: true,
+        navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>']
+    });
+
+    // View All buttons
+    document.querySelectorAll('.view-all-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const targetClass = button.dataset.target;
+            const hiddenItems = document.querySelectorAll(`.${targetClass} .hidden-anime`);
+            hiddenItems.forEach(item => {
+                item.style.display = item.style.display === 'block' ? 'none' : 'block';
+            });
+            button.textContent = button.textContent.includes('View All') ? 'Show Less' : 'View All';
+        });
+    });
+</script>
+</body>
+</html>

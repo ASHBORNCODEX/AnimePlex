@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+{% extends 'DashBoard.html' %}
+{% block content %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <strong>ADD Anime </strong>
+        </div>
+        <div class="card-body card-block">
+            <form action="{% url 'save_anime' %}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                {% csrf_token %}
+
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label for="text-input1" class=" form-control-label">English Name</label>
+                    </div>
+                    <div class="col-12 col-md-9"><input type="text" id="text-input1" name="eng_name"
+                                                        placeholder="Englsih Name" class="form-control"></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label for="text-input2" class=" form-control-label">Japanese Name</label>
+                    </div>
+                    <div class="col-12 col-md-9"><input type="text" id="text-input2" name="jap_name"
+                                                        placeholder="Japanese Name" class="form-control"></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label for="text-input2" class=" form-control-label">Episode Count</label>
+                    </div>
+                    <div class="col-12 col-md-9"><input type="number" id="episode-count" name="episode"
+                                                        placeholder="Episode" class="form-control"></div>
+                </div>
+                 <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label for="text-input2" class=" form-control-label">Studio</label>
+                    </div>
+                    <div class="col-12 col-md-9"><input type="text" id="text-input4" name="studio"
+                                                        placeholder="Studio" class="form-control"></div>
+                </div>
+                 <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label for="text-input2" class=" form-control-label">Producers</label>
+                    </div>
+                    <div class="col-12 col-md-9"><input type="text" id="text-input5" name="producer"
+                                                        placeholder="Producer" class="form-control"></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label for="text-input2" class=" form-control-label">Episode Duration</label>
+                    </div>
+                    <div class="col-12 col-md-9"><input type="text" id="text-input3" name="duration"
+                                                        placeholder="Duration" class="form-control"></div>
+                </div>
+
+
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="textarea-input"
+                                                     class=" form-control-label">Description</label></div>
+                    <div class="col-12 col-md-9"><textarea name="description" id="textarea-input" rows="9"
+                                                           placeholder="Description" class="form-control"></textarea>
+                    </div>
+                </div>
+                 <!-- Type (CharField -> single radio) -->
+                <div class="row form-group">
+                    <div class="col col-md-3"><label class=" form-control-label">Type</label></div>
+                    <div class="col col-md-9">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" name="type" value="Movie" class="form-check-input"> Movie
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" name="type" value="OVA" class="form-check-input"> OVA
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" name="type" value="ONA" class="form-check-input"> ONA
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" name="type" class="form-check-input" checked> TV Series
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label for="genres" class="form-control-label">Select Genres</label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <select id="genres" name="genres" multiple class="form-control" size="6">
+                            {% for genre in genres %}
+                            <option value="{{ genre.id }}">{{ genre.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="row form-group">
+                    <div class="col col-md-3"><label class=" form-control-label">Audio Versions</label></div>
+                    <div class="col col-md-9">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="checkbox" name="versions" value="Subbed" class="form-check-input"> Subbed
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="checkbox" name="versions" value="Dubbed" class="form-check-input"> Dubbed
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="file-input" class=" form-control-label">Anime Image</label>
+                    </div>
+                    <div class="col-12 col-md-9"><input type="file" id="file-input" name="anime_image"
+                                                        class="form-control-file"></div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fa fa-dot-circle-o"></i> Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
+{% endblock %}
