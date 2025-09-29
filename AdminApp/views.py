@@ -14,7 +14,7 @@ def dashboard(request):
     return render(request , 'DashBoard.html' , {'Anime_Names' : Anime_Names ,'Genres' :Genres})
 
 def add_anime(request):
-    genres = Genre.objects.all()  # fetch all genres from DB
+    genres = Genre.objects.all()
     return render(request, 'AddAnime.html', {'genres': genres})
 
 
@@ -31,7 +31,7 @@ def save_anime(request):
         image = request.FILES['anime_image']
         versions = request.POST.getlist('versions')
 
-        # Create AnimeDB object
+
         obj = AnimeDB(
             Jap_Name=jap_name,
             Eng_Name=eng_name,
