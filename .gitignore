@@ -1,0 +1,36 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment / virtualenv
+venv/
+env/
+.env
+
+# Django stuff:
+*.sqlite3          # default database
+db.sqlite3         # common name for default DB
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.swp
+
+# Media files
+media/
+
+# Static files (collected)
+staticfiles/
+static/
+
+# Build / distribution folders
+build/
+dist/
+*.egg-info/
+
+# IDE / OS files
+.idea/
+.vscode/
+.DS_Store

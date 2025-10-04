@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 {% load static %}
 <html lang="zxx">
@@ -14,7 +13,7 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+          rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -38,262 +37,272 @@
 </head>
 
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<!-- Header Section Begin -->
+<header class="header" style="margin-top:5px;">
+
+    <div class="container">
+
+        <div class="row align-items-center py-2 bg-grey">
+            <!-- Admin icon -->
+            <a href="{% url 'admin_login_page' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                     fill="currentColor" class="bi bi-android2" viewBox="0 0 16 16">
+                    <path d="m10.213 1.471.691-1.26q.069-.124-.048-.192-.128-.057-.195.058l-.7 1.27A4.8 4.8 0 0 0 8.005.941q-1.032 0-1.956.404l-.7-1.27Q5.281-.037 5.154.02q-.117.069-.049.193l.691 1.259a4.25 4.25 0 0 0-1.673 1.476A3.7 3.7 0 0 0 3.5 5.02h9q0-1.125-.623-2.072a4.27 4.27 0 0 0-1.664-1.476ZM6.22 3.303a.37.37 0 0 1-.267.11.35.35 0 0 1-.263-.11.37.37 0 0 1-.107-.264.37.37 0 0 1 .107-.265.35.35 0 0 1 .263-.11q.155 0 .267.11a.36.36 0 0 1 .112.265.36.36 0 0 1-.112.264m4.101 0a.35.35 0 0 1-.262.11.37.37 0 0 1-.268-.11.36.36 0 0 1-.112-.264q0-.154.112-.265a.37.37 0 0 1 .268-.11q.155 0 .262.11a.37.37 0 0 1 .107.265q0 .153-.107.264M3.5 11.77q0 .441.311.75.311.306.76.307h.758l.01 2.182q0 .414.292.703a.96.96 0 0 0 .7.288.97.97 0 0 0 .71-.288.95.95 0 0 0 .292-.703v-2.182h1.343v2.182q0 .414.292.703a.97.97 0 0 0 .71.288.97.97 0 0 0 .71-.288.95.95 0 0 0 .292-.703v-2.182h.76q.436 0 .749-.308.31-.307.311-.75V5.365h-9zm10.495-6.587a.98.98 0 0 0-.702.278.9.9 0 0 0-.293.685v4.063q0 .406.293.69a.97.97 0 0 0 .702.284q.42 0 .712-.284a.92.92 0 0 0 .293-.69V6.146a.9.9 0 0 0-.293-.685 1 1 0 0 0-.712-.278m-12.702.283a1 1 0 0 1 .712-.283q.41 0 .702.283a.9.9 0 0 1 .293.68v4.063a.93.93 0 0 1-.288.69.97.97 0 0 1-.707.284 1 1 0 0 1-.712-.284.92.92 0 0 1-.293-.69V6.146q0-.396.293-.68"/>
+                </svg>
+            </a>
+
+            <!-- Sidebar toggle -->
+            <div class="col-auto">
+                <div class="menu-toggle sidebars" onclick="toggleSidebar()">&#9776;</div>
+                <div id="sidebar" class="sidebar">
+                    <a href="javascript:void(0)" class="close-btn" onclick="toggleSidebar()">× Close</a>
+                    <a href="{% url 'filter_anime' 'version' 'sub' %}">Subbed Anime</a>
+                    <a href="{% url 'filter_anime' 'version' 'dub' %}">Dubbed Anime</a>
+                    <a href="{% url 'filter_anime' 'type' 'movie' %}">Movies</a>
+                    <a href="{% url 'filter_anime' 'type' 'tv-series' %}">TV Series</a>
+                    <a href="{% url 'filter_anime' 'type' 'ova' %}">OVAs</a>
+                    <a href="{% url 'filter_anime' 'type' 'ona' %}">ONAs</a>
+                </div>
+            </div>
+
+            <!-- Logo (centered) -->
+            <div class="col text-center">
+                <a href="{% url 'homepage' %}">
+                    <img src="{% static 'web/img/logo_name.png' %}"
+                         alt="Logo"
+                         class="img-fluid"
+                         style="max-height:50px;">
+                </a>
+            </div>
+
+            <!-- Right side (admin + profile/login) -->
+            <div class="col-auto align-items-center">
+
+                <!-- Profile or login -->
+                {% if request.session.Name %}
+                <div class="profile-container">
+                    <div class="circle" id="profileBtn">
+                        {% if user.Profile_Image %}
+                        <img src="{{ user.Profile_Image.url }}" alt="Profile" class="profile-icon">
+                        {% else %}
+                        <i class="fa fa-user"></i>
+                        {% endif %}
+                    </div>
+                    <div class="profile-dropdown" id="dropdownMenu">
+                        <a href="{% url 'profile_page' %}"><i class="fa fa-user"></i> Profile</a>
+                        <a href="{% url 'watch_list' %}"><i class="fa fa-list"></i> Watch List</a>
+                        <a href="{% url 'user_logout' %}"><i class="fa fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+                {% else %}
+                <a href="{% url 'sign_in' %}" class="ms-2">
+                    <span class="icon_profile"></span>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div id="mobile-menu-wrap">
+
+        </div>
     </div>
+</header>
+<!-- Header End -->
 
-    <!-- Header Section Begin -->
-   <header class="header" style="margin-top:5px;">
 
+<div class="main-div">
+    <div class="pt-5">
+        <h3 class="text-center greeting">Hi {{request.session.Name}}</h3>
+    </div>
+    <div class="d-flex align-items-center justify-content-center main-heading">
+        <div class="headings">
+            <a href="{% url 'profile_page' %}" class="headings">Profile</a>
+        </div>
+        <div>
+            <a href="{% url 'watch_list' %}" class="headings">Watch List</a>
+        </div>
+        <div>
+            <a href="{% url 'user_logout' %}" class="headings">Logout</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="main-divisions">
+    <div class="profile-content">
         <div class="container">
+            <div class="">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="h2-heading mb-4"><i class="fas fa-heart mr-3"></i>Watch List</h2>
+                </div>
 
-            <div class="row align-items-center py-2 bg-grey">
-                  <!-- Admin icon -->
-    <a href="{% url 'admin_login_page' %}" >
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-           fill="currentColor" class="bi bi-android2" viewBox="0 0 16 16">
-        <path d="m10.213 1.471.691-1.26q.069-.124-.048-.192-.128-.057-.195.058l-.7 1.27A4.8 4.8 0 0 0 8.005.941q-1.032 0-1.956.404l-.7-1.27Q5.281-.037 5.154.02q-.117.069-.049.193l.691 1.259a4.25 4.25 0 0 0-1.673 1.476A3.7 3.7 0 0 0 3.5 5.02h9q0-1.125-.623-2.072a4.27 4.27 0 0 0-1.664-1.476ZM6.22 3.303a.37.37 0 0 1-.267.11.35.35 0 0 1-.263-.11.37.37 0 0 1-.107-.264.37.37 0 0 1 .107-.265.35.35 0 0 1 .263-.11q.155 0 .267.11a.36.36 0 0 1 .112.265.36.36 0 0 1-.112.264m4.101 0a.35.35 0 0 1-.262.11.37.37 0 0 1-.268-.11.36.36 0 0 1-.112-.264q0-.154.112-.265a.37.37 0 0 1 .268-.11q.155 0 .262.11a.37.37 0 0 1 .107.265q0 .153-.107.264M3.5 11.77q0 .441.311.75.311.306.76.307h.758l.01 2.182q0 .414.292.703a.96.96 0 0 0 .7.288.97.97 0 0 0 .71-.288.95.95 0 0 0 .292-.703v-2.182h1.343v2.182q0 .414.292.703a.97.97 0 0 0 .71.288.97.97 0 0 0 .71-.288.95.95 0 0 0 .292-.703v-2.182h.76q.436 0 .749-.308.31-.307.311-.75V5.365h-9zm10.495-6.587a.98.98 0 0 0-.702.278.9.9 0 0 0-.293.685v4.063q0 .406.293.69a.97.97 0 0 0 .702.284q.42 0 .712-.284a.92.92 0 0 0 .293-.69V6.146a.9.9 0 0 0-.293-.685 1 1 0 0 0-.712-.278m-12.702.283a1 1 0 0 1 .712-.283q.41 0 .702.283a.9.9 0 0 1 .293.68v4.063a.93.93 0 0 1-.288.69.97.97 0 0 1-.707.284 1 1 0 0 1-.712-.284.92.92 0 0 1-.293-.69V6.146q0-.396.293-.68"/>
-      </svg>
-    </a>
+                <!--Begin: Section film list-->
+                <div class="fav-tabs mb-4">
+                    <ul class="nav nav-tabs pre-tabs pre-tabs-min">
+                        <li class="nav-item">
+                            <a href="{% url 'watch_list' %}"
+                               class="nav-link {% if not request.GET.category %}active{% endif %}">
+                                All
+                            </a>
+                        </li>
 
-  <!-- Sidebar toggle -->
-  <div class="col-auto">
-  <div class="menu-toggle sidebars" onclick="toggleSidebar()">&#9776;</div>
-  <div id="sidebar" class="sidebar">
-    <a href="javascript:void(0)" class="close-btn" onclick="toggleSidebar()">× Close</a>
-    <a href="{% url 'filter_anime' 'version' 'sub' %}">Subbed Anime</a>
-    <a href="{% url 'filter_anime' 'version' 'dub' %}">Dubbed Anime</a>
-    <a href="{% url 'filter_anime' 'type' 'movie' %}">Movies</a>
-    <a href="{% url 'filter_anime' 'type' 'tv-series' %}">TV Series</a>
-    <a href="{% url 'filter_anime' 'type' 'ova' %}">OVAs</a>
-    <a href="{% url 'filter_anime' 'type' 'ona' %}">ONAs</a>
-  </div>
-</div>
+                        <li class="nav-item">
+                            <a href="?category=watching"
+                               class="nav-link {% if request.GET.category == 'watching' %}active{% endif %}">
+                                Watching
+                            </a>
+                        </li>
 
-  <!-- Logo (centered) -->
-  <div class="col text-center">
-    <a href="{% url 'homepage' %}">
-      <img src="{% static 'web/img/logo_name.png' %}"
-           alt="Logo"
-           class="img-fluid"
-           style="max-height:50px;">
-    </a>
-  </div>
+                        <li class="nav-item">
+                            <a href="?category=on_hold"
+                               class="nav-link {% if request.GET.category == 'on_hold' %}active{% endif %}">
+                                On-Hold
+                            </a>
+                        </li>
 
-  <!-- Right side (admin + profile/login) -->
-  <div class="col-auto align-items-center" >
+                        <li class="nav-item">
+                            <a href="?category=plan_to_watch"
+                               class="nav-link {% if request.GET.category == 'plan_to_watch' %}active{% endif %}">
+                                Plan to Watch
+                            </a>
+                        </li>
 
-    <!-- Profile or login -->
-    {% if request.session.Name %}
-    <div class="profile-container">
-    <div class="circle" id="profileBtn">
-        {% if user.Profile_Image %}
-            <img src="{{ user.Profile_Image.url }}" alt="Profile" class="profile-icon">
-        {% else %}
-            <i class="fa fa-user"></i>
-        {% endif %}
-    </div>
-    <div class="profile-dropdown" id="dropdownMenu">
-        <a href="{% url 'profile_page' %}"><i class="fa fa-user"></i> Profile</a>
-        <a href="{% url 'watch_list' %}"><i class="fa fa-list"></i> Watch List</a>
-        <a href="{% url 'user_logout' %}"><i class="fa fa-sign-out-alt"></i> Logout</a>
-    </div>
-    </div>
-    {% else %}
-    <a href="{% url 'sign_in' %}" class="ms-2">
-      <span class="icon_profile"></span>
-    </a>
-    {% endif %}
-  </div>
-</div>
+                        <li class="nav-item">
+                            <a href="?category=dropped"
+                               class="nav-link {% if request.GET.category == 'dropped' %}active{% endif %}">
+                                Dropped
+                            </a>
+                        </li>
 
-            <div id="mobile-menu-wrap">
+                        <li class="nav-item">
+                            <a href="?category=completed"
+                               class="nav-link {% if request.GET.category == 'completed' %}active{% endif %}">
+                                Completed
+                            </a>
+                        </li>
+                    </ul>
+                </div>
 
-            </div>
-        </div>
-    </header>
-    <!-- Header End -->
+                <div class="card_divisions">
+                    {% if watchlist %}
+                    <div class="row row-cols-1 row-cols-md-4 g-4 px-3">
+
+                        {% for item in watchlist %}
+                        <div class="col">
 
 
-    <div class="main-div">
-        <div class="pt-5">
-            <h3 class="text-center greeting">Hi {{request.session.Name}}</h3>
-        </div>
-        <div class="d-flex align-items-center justify-content-center main-heading">
-            <div class="headings">
-                <a href="{% url 'profile_page' %}" class="headings" >Profile</a>
-            </div>
-            <div>
-                <a href="{% url 'watch_list' %}" class="headings" >Watch List</a>
-            </div>
-            <div>
-                <a href="{% url 'user_logout' %}" class="headings">Logout</a>
-            </div>
-        </div>
-    </div>
+                            <div class="card h-100 rounded-box position-relative" style="background-color:#B7ACAC">
+                                <div class="dr-fav show  position-absolute " style="margin-left:190px;">
+                                    <a data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
+                                       class="btn btn-circle btn-light btn-fav"><i class="fas fa-ellipsis-v"></i></a>
+                                    <div class="dropdown-menu dropdown-menu-model dropdown-menu-normal"
+                                         aria-labelledby="ssc-list" x-placement="top-start"
+                                         style="position: absolute; transform: translate3d(0px, -245px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                        <!--                            <a class="wl-item dropdown-item" data-type="1" data-movieid="19239" data-page="watch-list" href="javascript:;">Watching</a>-->
+                                        <!--                            <a class="wl-item dropdown-item" data-type="2" data-movieid="19239" data-page="watch-list" href="javascript:;">On-Hold</a>-->
+                                        <!--                            <a class="wl-item dropdown-item" data-type="3" data-movieid="19239" data-page="watch-list" href="javascript:;">Plan to Watch</a>-->
+                                        <!--                            <a class="wl-item dropdown-item added" data-type="4" data-movieid="19239" data-page="watch-list" href="javascript:;">Dropped<i class="fas fa-check ml-2"></i></a>-->
+                                        <!--                            <a class="wl-item dropdown-item" data-type="5" data-movieid="19239" data-page="watch-list" href="javascript:;">Completed</a>-->
+                                        <a class="wl-item dropdown-item text-danger"
+                                           href="{% url 'remove_anime' item.anime.id %}?category={{ request.GET.category }}"
+                                           data-movieid="{{ item.anime.id }}" data-page="watch-list" data-type="0">Remove</a>
 
+                                    </div>
+                                </div>
+                                <!-- Anime image -->
+                                <img src="{{ item.anime.Image.url }}" style="height:350px;width:100%"
+                                     alt="{{ item.anime_name }}">
 
-    <div class="main-divisions">
-        <div class="profile-content">
-            <div class="container">
-                <div class="">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h2 class="h2-heading mb-4"><i class="fas fa-heart mr-3"></i>Watch List</h2>
-                    </div>
+                                <div class="card-body">
+                                    <!-- Anime title -->
+                                    <h5 class="card-title">{{ item.anime_name }}</h5>
 
-                    <!--Begin: Section film list-->
-                    <div class="fav-tabs mb-4">
-  <ul class="nav nav-tabs pre-tabs pre-tabs-min">
-    <li class="nav-item" >
-      <a href="{% url 'watch_list' %}" class="nav-link {% if not request.GET.category %}active{% endif %}">
-        All
-      </a>
-    </li>
+                                    <!-- Category -->
+                                    <p class="card-text">
+                                        <strong>Category:</strong> {{ item.category|title }}
+                                    </p>
 
-    <li class="nav-item">
-      <a href="?category=watching" class="nav-link {% if request.GET.category == 'watching' %}active{% endif %}">
-        Watching
-      </a>
-    </li>
-
-    <li class="nav-item">
-      <a href="?category=on_hold" class="nav-link {% if request.GET.category == 'on_hold' %}active{% endif %}">
-        On-Hold
-      </a>
-    </li>
-
-    <li class="nav-item">
-      <a href="?category=plan_to_watch" class="nav-link {% if request.GET.category == 'plan_to_watch' %}active{% endif %}">
-        Plan to Watch
-      </a>
-    </li>
-
-    <li class="nav-item">
-      <a href="?category=dropped" class="nav-link {% if request.GET.category == 'dropped' %}active{% endif %}">
-        Dropped
-      </a>
-    </li>
-
-    <li class="nav-item">
-      <a href="?category=completed" class="nav-link {% if request.GET.category == 'completed' %}active{% endif %}">
-        Completed
-      </a>
-    </li>
-  </ul>
-</div>
-
-                   <div class="card_divisions">
-                        {% if watchlist %}
-    <div class="row row-cols-1 row-cols-md-4 g-4 px-3">
-
-        {% for item in watchlist %}
-            <div class="col">
-
-
-                <div class="card h-100 rounded-box position-relative"  style="background-color:#B7ACAC">
-                     <div class="dr-fav show  position-absolute " style="margin-left:190px;">
-                         <a data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-circle btn-light btn-fav"><i class="fas fa-ellipsis-v"></i></a>
-                        <div class="dropdown-menu dropdown-menu-model dropdown-menu-normal" aria-labelledby="ssc-list" x-placement="top-start" style="position: absolute; transform: translate3d(0px, -245px, 0px); top: 0px; left: 0px; will-change: transform;">
-<!--                            <a class="wl-item dropdown-item" data-type="1" data-movieid="19239" data-page="watch-list" href="javascript:;">Watching</a>-->
-<!--                            <a class="wl-item dropdown-item" data-type="2" data-movieid="19239" data-page="watch-list" href="javascript:;">On-Hold</a>-->
-<!--                            <a class="wl-item dropdown-item" data-type="3" data-movieid="19239" data-page="watch-list" href="javascript:;">Plan to Watch</a>-->
-<!--                            <a class="wl-item dropdown-item added" data-type="4" data-movieid="19239" data-page="watch-list" href="javascript:;">Dropped<i class="fas fa-check ml-2"></i></a>-->
-<!--                            <a class="wl-item dropdown-item" data-type="5" data-movieid="19239" data-page="watch-list" href="javascript:;">Completed</a>-->
-                            <a class="wl-item dropdown-item text-danger" href="{% url 'remove_anime' item.anime.id %}?category={{ request.GET.category }}" data-movieid="{{ item.anime.id }}" data-page="watch-list" data-type="0">Remove</a>
-
+                                    <!-- Link to anime detail -->
+                                    <a href="{% url 'single_anime' item.anime.id %}" class="btn btn-danger btn-sm">
+                                        View Details
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                     </div>
-                    <!-- Anime image -->
-                    <img src="{{ item.anime.Image.url }}" style="height:350px;width:100%" alt="{{ item.anime_name }}">
+                        {% empty %}
+                        <p class="text-center">No anime in your watchlist.</p>
+                        {% endfor %}
 
-                    <div class="card-body">
-                        <!-- Anime title -->
-                        <h5 class="card-title">{{ item.anime_name }}</h5>
-
-                        <!-- Category -->
-                        <p class="card-text">
-                            <strong>Category:</strong> {{ item.category|title }}
-                        </p>
-
-                        <!-- Link to anime detail -->
-                        <a href="{% url 'single_anime' item.anime.id %}" class="btn btn-danger btn-sm">
-                            View Details
-                        </a>
                     </div>
+                    {% endif %}
                 </div>
-            </div>
-        {% empty %}
-            <p class="text-center">No anime in your watchlist.</p>
-        {% endfor %}
 
+                <!--End: Section film list-->
+
+            </div>
+        </div>
     </div>
-                       {% endif %}
 </div>
 
-                    <!--End: Section film list-->
-
-                </div>
-            </div>
-        </div>
+<footer class="footer">
+    <div class="page-up">
+        <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
     </div>
 
-    <footer class="footer">
-        <div class="page-up">
-            <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
-        </div>
+</footer>
+<!-- Footer Section End -->
 
-    </footer>
-    <!-- Footer Section End -->
+<style>
+    .rounded-box {
+        border: 5px solid black;   /* thickness & color */
+        border-radius: 10px;       /* rounded corners */
+        padding: 10px;             /* space inside */
+    }
+</style>
 
-    <style>
-        .rounded-box {
-            border: 5px solid black;   /* thickness & color */
-            border-radius: 10px;       /* rounded corners */
-            padding: 10px;             /* space inside */
-        }
-    </style>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+     const profileBtn = document.getElementById("profileBtn");
+     const dropdownMenu = document.getElementById("dropdownMenu");
 
-      <script>
- document.addEventListener("DOMContentLoaded", function () {
-  const profileBtn = document.getElementById("profileBtn");
-  const dropdownMenu = document.getElementById("dropdownMenu");
+     profileBtn.addEventListener("click", function (e) {
+       e.stopPropagation();
+       dropdownMenu.classList.toggle("show");
+     });
 
-  profileBtn.addEventListener("click", function (e) {
-    e.stopPropagation();
-    dropdownMenu.classList.toggle("show");
-  });
-
-  document.addEventListener("click", function () {
-    dropdownMenu.classList.remove("show");
-  });
-});
+     document.addEventListener("click", function () {
+       dropdownMenu.classList.remove("show");
+     });
+   });
 
 
 </script>
-    <script>
-  function toggleSidebar() {
-    const sidebar = document.getElementById("sidebar");
-    if (sidebar.style.width === "250px") {
-      sidebar.style.width = "0";
-    } else {
-      sidebar.style.width = "250px";
+<script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      if (sidebar.style.width === "250px") {
+        sidebar.style.width = "0";
+      } else {
+        sidebar.style.width = "250px";
+      }
     }
-  }
-  </script>
+</script>
 
 
-
-
-    <!-- Js Plugins -->
-    <script src="{% static 'web/js/jquery-3.3.1.min.js' %}"></script>
-    <script src="{% static 'web/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'web/js/player.js' %}"></script>
-    <script src="{% static 'web/js/jquery.nice-select.min.js' %}"></script>
-    <script src="{% static 'web/js/mixitup.min.js' %}"></script>
-    <script src="{% static 'web/js/jquery.slicknav.js' %}"></script>
-    <script src="{% static 'web/js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'web/js/main.js' %}"></script>
+<!-- Js Plugins -->
+<script src="{% static 'web/js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'web/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'web/js/player.js' %}"></script>
+<script src="{% static 'web/js/jquery.nice-select.min.js' %}"></script>
+<script src="{% static 'web/js/mixitup.min.js' %}"></script>
+<script src="{% static 'web/js/jquery.slicknav.js' %}"></script>
+<script src="{% static 'web/js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'web/js/main.js' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>

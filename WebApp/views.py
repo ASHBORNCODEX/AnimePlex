@@ -13,7 +13,7 @@ def homepage(request):
     rating = AnimeDB.objects.annotate(avg_rating=Coalesce(
             Avg('ratings__value'),  # must match related_name
             Value(0.0),
-            output_field=FloatField()  # prevents mixed-type errors
+            output_field=FloatField()
         )
     ).order_by('-avg_rating')
 
@@ -23,25 +23,25 @@ def homepage(request):
     # Most viewed anime
     counts = AnimeDB.objects.all().order_by('-views')
 
-    username = request.session.get("Name")
-    if not username:
-        return redirect("sign_in")
 
-    user = get_object_or_404(RegistrationDB, UserName=username)
+    username = request.session.get("Name")
+    user = None
+    if username:
+        user = RegistrationDB.objects.filter(UserName=username).first()
 
     # Random Anime
     random_anime = AnimeDB.objects.all().order_by('?')[:3]
-
     random_animes = AnimeDB.objects.all().order_by('?')[:3]
 
     return render(request, 'HomePage.html', {
         'anime': anime,
         'counts': counts,
-        'rating': rating ,
-        'random_anime' : random_anime,
-        'random_animes' : random_animes,
-        'user' : user,
+        'rating': rating,
+        'random_anime': random_anime,
+        'random_animes': random_animes,
+        'user': user,
     })
+
 
 
 
@@ -53,16 +53,19 @@ def single_anime(request, anime_id):
     comments = anime.comments.all().order_by('-created_at')
     rating_form = None
     user_rating = None
+    comment_form = None
+    user = None
 
+    # Check if user is logged in
+    username = request.session.get("Name")
+    if username:
+        user = RegistrationDB.objects.get(UserName=username)
 
-    if 'Name' in request.session:
-        user = RegistrationDB.objects.get(UserName=request.session['Name'])
-
-        # check if user already rated
+        # Check if user already rated
         user_rating = RatingDB.objects.filter(anime=anime, user=user).first()
 
         if request.method == 'POST':
-            if 'content' in request.POST:  # comment form submitted
+            if 'content' in request.POST:  # Comment form submitted
                 comment_form = CommentForm(request.POST)
                 if comment_form.is_valid():
                     comment = comment_form.save(commit=False)
@@ -71,7 +74,7 @@ def single_anime(request, anime_id):
                     comment.save()
                     return redirect('single_anime', anime_id=anime.id)
 
-            elif 'value' in request.POST:  # rating form submitted
+            elif 'value' in request.POST:  # Rating form submitted
                 rating_form = RatingForm(request.POST, instance=user_rating)
                 if rating_form.is_valid():
                     rating = rating_form.save(commit=False)
@@ -79,19 +82,11 @@ def single_anime(request, anime_id):
                     rating.user = user
                     rating.save()
                     return redirect('single_anime', anime_id=anime.id)
+
         else:
             comment_form = CommentForm()
             rating_form = RatingForm(instance=user_rating)
-    else:
-        comment_form = None
 
-
-
-    username = request.session.get("Name")
-    if not username:
-        return redirect("sign_in")
-
-    user = get_object_or_404(RegistrationDB, UserName=username)
 
     return render(request, 'SingleAnime.html', {
         'anime': anime,
@@ -101,8 +96,9 @@ def single_anime(request, anime_id):
         'user_rating': user_rating,
         'average_rating': anime.average_rating(),
         'ratings_count': anime.ratings_count(),
-        'user' : user,
+        'user': user,  # None if not logged in
     })
+
 
 
 def stream_anime(request,anime_id):
@@ -120,7 +116,7 @@ def filter_anime(request, filter_type, filter_value):
     random_anime = AnimeDB.objects.all().order_by('?')[:4]
     random_animes = AnimeDB.objects.all().order_by('?')[:4]
 
-    anime = AnimeDB.objects.none()  # default empty queryset
+    anime = AnimeDB.objects.none()
     label = ""
 
     # Handle genre filtering
@@ -147,14 +143,6 @@ def filter_anime(request, filter_type, filter_value):
         'random_anime': random_anime,
         'random_animes': random_animes,
     })
-
-
-
-
-
-
-
-
 
 
 

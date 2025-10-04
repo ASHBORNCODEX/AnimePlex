@@ -151,7 +151,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row recently-added">
+                    <div class="row recently-added ">
                         {% for a in anime %}
                         <div class="col-lg-4 col-md-6 col-sm-6 {% if forloop.counter > 6 %}hidden-anime{% endif %}">
                             <div class="product__item">
@@ -262,11 +262,16 @@
                         <div class="section-title"><h5>Random Anime Mix</h5></div>
                         <div class="filter__gallery">
                             {% for i in random_animes %}
-                            <div class="product__sidebar__view__item set-bg mix day years" data-setbg="{{i.Image.url}}">
-                                <div class="ep">{{i.Episode}}</div>
-                                <div class="view"><i class="fa fa-eye"></i>{{i.views}}</div>
-                                <h5><a href="{% url 'single_anime' anime_id=i.id %}">{{i.Eng_Name}}</a></h5>
-                            </div>
+                            <a href="{% url 'single_anime' anime_id=i.id %}" class="d-block mb-3">
+                                <div class="product__sidebar__view__item set-bg mix day years "
+                                     data-setbg="{{i.Image.url}}">
+                                    <div class="ep">{{i.Episode}}</div>
+                                    <div class="view"><i class="fa fa-eye"></i>{{i.views}}</div>
+                                </div>
+                                <h5 class="anime-name text-white">
+                                    {{i.Eng_Name}}
+                                </h5>
+                            </a>
                             {% endfor %}
                         </div>
                     </div>

@@ -13,9 +13,9 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
+          rel="stylesheet">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="stylesheet" href="{% static 'web/css/icon_after_login.css' %}">
     <link rel="stylesheet" href="{% static 'web/css/profileBtn.css' %}">
@@ -35,365 +35,392 @@
 </head>
 
 <body>
-    <!-- Page Preloader -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
-
-    <!-- Header Section Begin -->
-   <header class="header" style="margin-top:5px;">
-
-        <div class="container">
-
-            <div class="row align-items-center py-2 bg-grey">
-                  <!-- Admin icon -->
-    <a href="{% url 'admin_login_page' %}" >
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-           fill="currentColor" class="bi bi-android2" viewBox="0 0 16 16">
-        <path d="m10.213 1.471.691-1.26q.069-.124-.048-.192-.128-.057-.195.058l-.7 1.27A4.8 4.8 0 0 0 8.005.941q-1.032 0-1.956.404l-.7-1.27Q5.281-.037 5.154.02q-.117.069-.049.193l.691 1.259a4.25 4.25 0 0 0-1.673 1.476A3.7 3.7 0 0 0 3.5 5.02h9q0-1.125-.623-2.072a4.27 4.27 0 0 0-1.664-1.476ZM6.22 3.303a.37.37 0 0 1-.267.11.35.35 0 0 1-.263-.11.37.37 0 0 1-.107-.264.37.37 0 0 1 .107-.265.35.35 0 0 1 .263-.11q.155 0 .267.11a.36.36 0 0 1 .112.265.36.36 0 0 1-.112.264m4.101 0a.35.35 0 0 1-.262.11.37.37 0 0 1-.268-.11.36.36 0 0 1-.112-.264q0-.154.112-.265a.37.37 0 0 1 .268-.11q.155 0 .262.11a.37.37 0 0 1 .107.265q0 .153-.107.264M3.5 11.77q0 .441.311.75.311.306.76.307h.758l.01 2.182q0 .414.292.703a.96.96 0 0 0 .7.288.97.97 0 0 0 .71-.288.95.95 0 0 0 .292-.703v-2.182h1.343v2.182q0 .414.292.703a.97.97 0 0 0 .71.288.97.97 0 0 0 .71-.288.95.95 0 0 0 .292-.703v-2.182h.76q.436 0 .749-.308.31-.307.311-.75V5.365h-9zm10.495-6.587a.98.98 0 0 0-.702.278.9.9 0 0 0-.293.685v4.063q0 .406.293.69a.97.97 0 0 0 .702.284q.42 0 .712-.284a.92.92 0 0 0 .293-.69V6.146a.9.9 0 0 0-.293-.685 1 1 0 0 0-.712-.278m-12.702.283a1 1 0 0 1 .712-.283q.41 0 .702.283a.9.9 0 0 1 .293.68v4.063a.93.93 0 0 1-.288.69.97.97 0 0 1-.707.284 1 1 0 0 1-.712-.284.92.92 0 0 1-.293-.69V6.146q0-.396.293-.68"/>
-      </svg>
-    </a>
-
-  <!-- Sidebar toggle -->
-  <div class="col-auto">
-  <div class="menu-toggle sidebars" onclick="toggleSidebar()">&#9776;</div>
-  <div id="sidebar" class="sidebar">
-    <a href="javascript:void(0)" class="close-btn" onclick="toggleSidebar()">× Close</a>
-    <a href="{% url 'filter_anime' 'version' 'sub' %}">Subbed Anime</a>
-    <a href="{% url 'filter_anime' 'version' 'dub' %}">Dubbed Anime</a>
-    <a href="{% url 'filter_anime' 'type' 'movie' %}">Movies</a>
-    <a href="{% url 'filter_anime' 'type' 'tv-series' %}">TV Series</a>
-    <a href="{% url 'filter_anime' 'type' 'ova' %}">OVAs</a>
-    <a href="{% url 'filter_anime' 'type' 'ona' %}">ONAs</a>
-  </div>
+<!-- Page Preloader -->
+<div id="preloder">
+    <div class="loader"></div>
 </div>
 
-  <!-- Logo (centered) -->
-  <div class="col text-center">
-    <a href="{% url 'homepage' %}">
-      <img src="{% static 'web/img/logo_name.png' %}"
-           alt="Logo"
-           class="img-fluid"
-           style="max-height:50px;">
-    </a>
-  </div>
+<!-- Header Section Begin -->
+<header class="header" style="margin-top:5px;">
 
-  <!-- Right side (admin + profile/login) -->
-  <div class="col-auto align-items-center" >
+    <div class="container">
 
-    <!-- Profile or login -->
-    {% if request.session.Name %}
-    <div class="profile-container">
-    <div class="circle" id="profileBtn">
-        {% if user.Profile_Image %}
-            <img src="{{ user.Profile_Image.url }}" alt="Profile" class="profile-icon">
-        {% else %}
-            <i class="fa fa-user"></i>
-        {% endif %}
-    </div>
-    <div class="profile-dropdown" id="dropdownMenu">
-        <a href="{% url 'profile_page' %}"><i class="fa fa-user"></i> Profile</a>
-        <a href="{% url 'watch_list' %}"><i class="fa fa-list"></i> Watch List</a>
-        <a href="{% url 'user_logout' %}"><i class="fa fa-sign-out-alt"></i> Logout</a>
-    </div>
-    </div>
-    {% else %}
-    <a href="{% url 'sign_in' %}" class="ms-2">
-      <span class="icon_profile"></span>
-    </a>
-    {% endif %}
-  </div>
-</div>
+        <div class="row align-items-center py-2 bg-grey">
+            <!-- Admin icon -->
+            <a href="{% url 'admin_login_page' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                     fill="currentColor" class="bi bi-android2" viewBox="0 0 16 16">
+                    <path d="m10.213 1.471.691-1.26q.069-.124-.048-.192-.128-.057-.195.058l-.7 1.27A4.8 4.8 0 0 0 8.005.941q-1.032 0-1.956.404l-.7-1.27Q5.281-.037 5.154.02q-.117.069-.049.193l.691 1.259a4.25 4.25 0 0 0-1.673 1.476A3.7 3.7 0 0 0 3.5 5.02h9q0-1.125-.623-2.072a4.27 4.27 0 0 0-1.664-1.476ZM6.22 3.303a.37.37 0 0 1-.267.11.35.35 0 0 1-.263-.11.37.37 0 0 1-.107-.264.37.37 0 0 1 .107-.265.35.35 0 0 1 .263-.11q.155 0 .267.11a.36.36 0 0 1 .112.265.36.36 0 0 1-.112.264m4.101 0a.35.35 0 0 1-.262.11.37.37 0 0 1-.268-.11.36.36 0 0 1-.112-.264q0-.154.112-.265a.37.37 0 0 1 .268-.11q.155 0 .262.11a.37.37 0 0 1 .107.265q0 .153-.107.264M3.5 11.77q0 .441.311.75.311.306.76.307h.758l.01 2.182q0 .414.292.703a.96.96 0 0 0 .7.288.97.97 0 0 0 .71-.288.95.95 0 0 0 .292-.703v-2.182h1.343v2.182q0 .414.292.703a.97.97 0 0 0 .71.288.97.97 0 0 0 .71-.288.95.95 0 0 0 .292-.703v-2.182h.76q.436 0 .749-.308.31-.307.311-.75V5.365h-9zm10.495-6.587a.98.98 0 0 0-.702.278.9.9 0 0 0-.293.685v4.063q0 .406.293.69a.97.97 0 0 0 .702.284q.42 0 .712-.284a.92.92 0 0 0 .293-.69V6.146a.9.9 0 0 0-.293-.685 1 1 0 0 0-.712-.278m-12.702.283a1 1 0 0 1 .712-.283q.41 0 .702.283a.9.9 0 0 1 .293.68v4.063a.93.93 0 0 1-.288.69.97.97 0 0 1-.707.284 1 1 0 0 1-.712-.284.92.92 0 0 1-.293-.69V6.146q0-.396.293-.68"/>
+                </svg>
+            </a>
 
-            <div id="mobile-menu-wrap">
+            <!-- Sidebar toggle -->
+            <div class="col-auto">
+                <div class="menu-toggle sidebars" onclick="toggleSidebar()">&#9776;</div>
+                <div id="sidebar" class="sidebar">
+                    <a href="javascript:void(0)" class="close-btn" onclick="toggleSidebar()">× Close</a>
+                    <a href="{% url 'filter_anime' 'version' 'sub' %}">Subbed Anime</a>
+                    <a href="{% url 'filter_anime' 'version' 'dub' %}">Dubbed Anime</a>
+                    <a href="{% url 'filter_anime' 'type' 'movie' %}">Movies</a>
+                    <a href="{% url 'filter_anime' 'type' 'tv-series' %}">TV Series</a>
+                    <a href="{% url 'filter_anime' 'type' 'ova' %}">OVAs</a>
+                    <a href="{% url 'filter_anime' 'type' 'ona' %}">ONAs</a>
+                </div>
+            </div>
 
+            <!-- Logo (centered) -->
+            <div class="col text-center">
+                <a href="{% url 'homepage' %}">
+                    <img src="{% static 'web/img/logo_name.png' %}"
+                         alt="Logo"
+                         class="img-fluid"
+                         style="max-height:50px;">
+                </a>
+            </div>
+
+            <!-- Right side (admin + profile/login) -->
+            <div class="col-auto align-items-center">
+
+                <!-- Profile or login -->
+                {% if request.session.Name %}
+                <div class="profile-container">
+                    <div class="circle" id="profileBtn">
+                        {% if user.Profile_Image %}
+                        <img src="{{ user.Profile_Image.url }}" alt="Profile" class="profile-icon">
+                        {% else %}
+                        <i class="fa fa-user"></i>
+                        {% endif %}
+                    </div>
+                    <div class="profile-dropdown" id="dropdownMenu">
+                        <a href="{% url 'profile_page' %}"><i class="fa fa-user"></i> Profile</a>
+                        <a href="{% url 'watch_list' %}"><i class="fa fa-list"></i> Watch List</a>
+                        <a href="{% url 'user_logout' %}"><i class="fa fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+                {% else %}
+                <a href="{% url 'sign_in' %}" class="ms-2">
+                    <span class="icon_profile"></span>
+                </a>
+                {% endif %}
             </div>
         </div>
-    </header>
-    <!-- Header End -->
 
-    <!-- Breadcrumb Begin -->
-    <div class="breadcrumb-option">
-        <div class="container">
+        <div id="mobile-menu-wrap">
+
+        </div>
+    </div>
+</header>
+<!-- Header End -->
+
+<!-- Breadcrumb Begin -->
+<div class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__links">
+                    <a href="{% url 'homepage' %}"><i class="fa fa-home"></i> Home</a>
+                    <a href="#">Categories</a>
+                    <span>{{ anime.get_type_display }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+
+<!-- Anime Section Begin -->
+<section class="anime-details spad">
+    <div class="container">
+        <div class="anime__details__content">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb__links">
-                        <a href="{% url 'homepage' %}"><i class="fa fa-home"></i> Home</a>
-                        <a href="#">Categories</a>
-                        <span>{{ anime.get_type_display }}</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcrumb End -->
-
-    <!-- Anime Section Begin -->
-    <section class="anime-details spad">
-        <div class="container">
-            <div class="anime__details__content">
-                <div class="row">
-                    <!-- Anime Poster -->
-                    <div class="col-lg-3">
-                        <div class="anime__details__pic set-bg" data-setbg="{{ anime.Image.url }}">
-                            <div class="comment"><i class="fa fa-comments"></i> {{ comments.count }}</div>
-                            <div class="view"><i class="fa fa-eye"></i> {{ anime.views }}</div>
-                        </div>
-                    </div>
-
-                    <!-- Anime Details -->
-                    <div class="col-lg-9">
-                        <div class="anime__details__text">
-                            <div class="anime__details__title">
-                                <h3>{{ anime.Eng_Name }}</h3>
-                                <span>{{ anime.Jap_Name }}</span>
-                            </div>
-
-                            <div class="anime__details__rating">
-                                <div class="rating">
-                                    {% if request.session.Name %}
-                                        <form method="post" id="rating-form">
-                                            {% csrf_token %}
-                                            <div class="star-rating">
-                                                {% for i in "12345" %}
-                                                    <span class="star {% if user_rating and user_rating.value >= forloop.counter %}selected{% endif %}"
-                                                          data-value="{{ forloop.counter }}">&#9733;</span>
-                                                {% endfor %}
-                                            </div>
-                                            <input type="hidden" name="value" id="rating-value" value="{{ user_rating.value|default:'' }}">
-                                        </form>
-                                    {% else %}
-                                        <p><a href="{% url 'sign_in' %}">Log in</a> to rate this anime.</p>
-                                    {% endif %}
-                                </div>
-                                {% if user_rating %}
-
-                <span class="mt-1">{{ user_rating.value }} ⭐</span>
-            {% endif %}
-                            </div>
-
-                            <p>{{ anime.Description }}</p>
-
-                            <div class="anime__details__widget">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6">
-                                        <ul>
-                                            <li><span>Type:</span> {{ anime.get_type_display }}</li>
-                                            <li><span>Studios:</span> {{ anime.Studio }}</li>
-                                             <li>
-                                                <span>Genre:</span>
-                                               {% for g in anime.genres.all %}
-                                                    <a href="{% url 'filter_anime' filter_type='genre' filter_value=g.name %}" class="genre-link">{{ g.name }}</a>{% if not forloop.last %}, {% endif %}
-                                                {% endfor %}
-                                            </li>
-                                            <li><span>Audio:</span> {{ anime.get_versions_display }}</li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6">
-                                        <ul>
-                                            <li><span>Scores:</span> {{ anime.average_rating }}</li>
-                                            <li><span>Episode:</span> {{ anime.Episode  }}</li>
-                                            <li><span>Duration:</span> {{ anime.Duration }} min/ep</li>
-                                            <li><span>Views:</span> {{ anime.views }}</li>
-
-
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Action Buttons -->
-                            <div class="anime__details__btn d-flex align-items-center " style="gap:20px;">
-                             <form method="post" action="{% url 'add_to_watchlist' anime.id %}">
-                              {% csrf_token %}
-                                      <div class="dropdown">
-                                        <button class="btn btn-danger watch-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                            <span>+ Add to List</span> <i class="fa fa-angle-right"></i>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                          <li><button class="dropdown-item" type="submit" name="category" value="watching">Watching</button></li>
-                                          <li><button class="dropdown-item" type="submit" name="category" value="on_hold">On-Hold</button></li>
-                                          <li><button class="dropdown-item" type="submit" name="category" value="plan_to_watch">Plan to Watch</button></li>
-                                          <li><button class="dropdown-item" type="submit" name="category" value="dropped">Dropped</button></li>
-                                          <li><button class="dropdown-item" type="submit" name="category" value="completed">Completed</button></li>
-                                        </ul>
-                                      </div>
-                             </form>
-                                <div>
-
-
-                                <a href="{% url 'stream_anime' anime_id=anime.id %}" class="btn btn-danger watch-btn">
-                                    <span>Watch Now</span> <i class="fa fa-angle-right"></i>
-                                </a>
-                                     </div>
-                           </div>
-                        </div>
+                <!-- Anime Poster -->
+                <div class="col-lg-3">
+                    <div class="anime__details__pic set-bg" data-setbg="{{ anime.Image.url }}">
+                        <div class="comment"><i class="fa fa-comments"></i> {{ comments.count }}</div>
+                        <div class="view"><i class="fa fa-eye"></i> {{ anime.views }}</div>
                     </div>
                 </div>
 
-                <!-- Comments Section -->
-                <div class="row mt-5">
-                    <div class="col-lg-8 col-md-8">
-                        <div class="anime__details__form">
+                <!-- Anime Details -->
+                <div class="col-lg-9">
+                    <div class="anime__details__text">
+                        <div class="anime__details__title">
+                            <h3>{{ anime.Eng_Name }}</h3>
+                            <span>{{ anime.Jap_Name }}</span>
+                        </div>
 
-                            {% if form %}
-                                <form method="post">
+                        <div class="anime__details__rating">
+                            <div class="rating">
+                                {% if request.session.Name %}
+                                <form method="post" id="rating-form">
                                     {% csrf_token %}
-                                    {{ form.as_p }}
-                                    <button type="submit" class="btn btn-primary">Post Comment</button>
+                                    <div class="star-rating">
+                                        {% for i in "12345" %}
+                                        <span class="star {% if user_rating and user_rating.value >= forloop.counter %}selected{% endif %}"
+                                              data-value="{{ forloop.counter }}">&#9733;</span>
+                                        {% endfor %}
+                                    </div>
+                                    <input type="hidden" name="value" id="rating-value"
+                                           value="{{ user_rating.value|default:'' }}">
                                 </form>
-                            {% else %}
-                                <p><a href="{% url 'sign_in' %}">Login</a> to add a comment.</p>
-                            {% endif %}
-
-                            <!-- Existing Comments -->
-                            <div class="mt-5">
-                                <div class="section-title"><h5>Comment ({{ comments.count }}) </h5></div>
-                                <ul class="list-unstyled " style="color:white ;">
-                                    {% for comment in comments %}
-                                        <li style="margin-bottom:10px;"><strong>{{ comment.user.UserName }}</strong>: {{ comment.content }} <small>({{ comment.created_at|date:"M d, Y " }})</small></li>
-                                    {% empty %}
-                                        <li>No comments yet.</li>
-                                    {% endfor %}
-                                </ul>
+                                {% else %}
+                                <p><a href="{% url 'sign_in' %}">Log in</a> to rate this anime.</p>
+                                {% endif %}
                             </div>
+                            {% if user_rating %}
+
+                            <span class="mt-1">{{ user_rating.value }} ⭐</span>
+                            {% endif %}
+                        </div>
+
+                        <p>{{ anime.Description }}</p>
+
+                        <div class="anime__details__widget">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <ul>
+                                        <li><span>Type:</span> {{ anime.get_type_display }}</li>
+                                        <li><span>Studios:</span> {{ anime.Studio }}</li>
+                                        <li>
+                                            <span>Genre:</span>
+                                            {% for g in anime.genres.all %}
+                                            <a href="{% url 'filter_anime' filter_type='genre' filter_value=g.name %}"
+                                               class="genre-link">{{ g.name }}</a>{% if not forloop.last %}, {% endif %}
+                                            {% endfor %}
+                                        </li>
+                                        <li><span>Audio:</span> {{ anime.get_versions_display }}</li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <ul>
+                                        <li><span>Scores:</span> {{ anime.average_rating }}</li>
+                                        <li><span>Episode:</span> {{ anime.Episode }}</li>
+                                        <li><span>Duration:</span> {{ anime.Duration }} min/ep</li>
+                                        <li><span>Views:</span> {{ anime.views }}</li>
+
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <!-- Action Buttons -->
+                        <div class="anime__details__btn d-flex align-items-center " style="gap:20px;">
+                            {% if request.session.Name %}
+                            <form method="post" action="{% url 'add_to_watchlist' anime.id %}">
+                                {% csrf_token %}
+                                <div class="dropdown">
+                                    <button class="btn btn-danger watch-btn dropdown-toggle" type="button"
+                                            data-bs-toggle="dropdown">
+                                        <span>+ Add to List</span> <i class="fa fa-angle-right"></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <button class="dropdown-item" type="submit" name="category"
+                                                    value="watching">Watching
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button class="dropdown-item" type="submit" name="category" value="on_hold">
+                                                On-Hold
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button class="dropdown-item" type="submit" name="category"
+                                                    value="plan_to_watch">Plan to Watch
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button class="dropdown-item" type="submit" name="category" value="dropped">
+                                                Dropped
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button class="dropdown-item" type="submit" name="category"
+                                                    value="completed">Completed
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </form>
+
+                            <a href="{% url 'stream_anime' anime_id=anime.id %}" class="btn btn-danger watch-btn">
+                                <span>Watch Now</span> <i class="fa fa-angle-right"></i>
+                            </a>
+                            {% else %}
+                            <p style="color:white;"><a href="{% url 'sign_in' %}">Log in</a> to watch or add to your
+                                list.</p>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comments Section -->
+            <div class="row mt-5">
+                <div class="col-lg-8 col-md-8">
+                    <div class="anime__details__form">
+
+                        {% if form %}
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit" class="btn btn-primary">Post Comment</button>
+                        </form>
+                        {% else %}
+                        <p><a href="{% url 'sign_in' %}">Login</a> to add a comment.</p>
+                        {% endif %}
+
+                        <!-- Existing Comments -->
+                        <div class="mt-5">
+                            <div class="section-title"><h5>Comment ({{ comments.count }}) </h5></div>
+                            <ul class="list-unstyled " style="color:white ;">
+                                {% for comment in comments %}
+                                <li style="margin-bottom:10px;"><strong>{{ comment.user.UserName }}</strong>: {{
+                                    comment.content }} <small>({{ comment.created_at|date:"M d, Y " }})</small></li>
+                                {% empty %}
+                                <li>No comments yet.</li>
+                                {% endfor %}
+                            </ul>
                         </div>
                     </div>
                 </div>
-
             </div>
-        </div>
-    </section>
-    <!-- Anime Section End -->
 
-    <!-- Footer Section Begin -->
-    <footer class="footer">
-        <div class="page-up">
-            <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
-        </div>
-    </footer>
-    <!-- Footer Section End -->
-
-    <!-- Search model -->
-    <div class="search-model">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-            <div class="search-close-switch"><i class="icon_close"></i></div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
-            </form>
         </div>
     </div>
+</section>
+<!-- Anime Section End -->
 
-    <!-- Custom Styles -->
-    <style>
-        /* Custom Styles */
+<!-- Footer Section Begin -->
+<footer class="footer">
+    <div class="page-up">
+        <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
+    </div>
+</footer>
+<!-- Footer Section End -->
+
+<!-- Search model -->
+<div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch"><i class="icon_close"></i></div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Search here.....">
+        </form>
+    </div>
+</div>
+
+<!-- Custom Styles -->
+<style>
+    /* Custom Styles */
 .genre-link { color: white; text-decoration: none; }
 .genre-link:hover { color: grey; }
 
 .star-rating {
-    display: flex;
-    gap: 5px;
-    cursor: pointer;
+display: flex;
+gap: 5px;
+cursor: pointer;
 }
 
 .star-rating .star {
-    font-size: 2rem !important; /* 👈 change this number to control size */
-    color: grey;
-    transition: color 0.2s ease;
+font-size: 2rem !important; /* 👈 change this number to control size */
+color: grey;
+transition: color 0.2s ease;
 }
 
 .star-rating .star.selected {
-    color: gold;
+color: gold;
 }
-    </style>
+</style>
 
 
-    <script>
-  function toggleSidebar() {
-    const sidebar = document.getElementById("sidebar");
-    if (sidebar.style.width === "250px") {
-      sidebar.style.width = "0";
-    } else {
-      sidebar.style.width = "250px";
+<script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      if (sidebar.style.width === "250px") {
+        sidebar.style.width = "0";
+      } else {
+        sidebar.style.width = "250px";
+      }
     }
-  }
-  </script>
+</script>
 
 
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+const stars = document.querySelectorAll(".star-rating .star");
+const ratingValue = document.getElementById("rating-value");
+const ratingForm = document.getElementById("rating-form"); // ✅ get the form
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-    const stars = document.querySelectorAll(".star-rating .star");
-    const ratingValue = document.getElementById("rating-value");
-    const ratingForm = document.getElementById("rating-form"); // ✅ get the form
-
-    stars.forEach(star => {
-        star.addEventListener("mouseover", function() {
-            resetStars();
-            highlightStars(this.dataset.value);
-        });
-
-        star.addEventListener("mouseout", resetStars);
-
-        star.addEventListener("click", function() {
-            ratingValue.value = this.dataset.value;
-            resetStars();
-            highlightStars(this.dataset.value, true);
-
-            // ✅ auto-submit the form after selecting a star
-            ratingForm.submit();
-        });
+stars.forEach(star => {
+    star.addEventListener("mouseover", function() {
+        resetStars();
+        highlightStars(this.dataset.value);
     });
 
-    function highlightStars(value, lock=false) {
-        stars.forEach(star => {
-            if (star.dataset.value <= value) {
-                star.classList.add("selected");
-                if (!lock) star.classList.add("hover");
-            }
-        });
-    }
+    star.addEventListener("mouseout", resetStars);
 
-    function resetStars() {
-        stars.forEach(star => {
-            star.classList.remove("selected", "hover");
-        });
-        if (ratingValue.value) {
-            highlightStars(ratingValue.value, true);
+    star.addEventListener("click", function() {
+        ratingValue.value = this.dataset.value;
+        resetStars();
+        highlightStars(this.dataset.value, true);
+
+        // ✅ auto-submit the form after selecting a star
+        ratingForm.submit();
+    });
+});
+
+function highlightStars(value, lock=false) {
+    stars.forEach(star => {
+        if (star.dataset.value <= value) {
+            star.classList.add("selected");
+            if (!lock) star.classList.add("hover");
         }
+    });
+}
+
+function resetStars() {
+    stars.forEach(star => {
+        star.classList.remove("selected", "hover");
+    });
+    if (ratingValue.value) {
+        highlightStars(ratingValue.value, true);
     }
+}
 });
 
 
 
 
 
-  $(document).ready(function() {
-      // Only apply niceSelect to selects WITHOUT .no-nice
-      $('select').not('.no-nice').niceSelect();
-  });
-
-    </script>
-     <script>
- document.addEventListener("DOMContentLoaded", function () {
-  const profileBtn = document.getElementById("profileBtn");
-  const dropdownMenu = document.getElementById("dropdownMenu");
-
-  profileBtn.addEventListener("click", function (e) {
-    e.stopPropagation();
-    dropdownMenu.classList.toggle("show");
-  });
-
-  document.addEventListener("click", function () {
-    dropdownMenu.classList.remove("show");
-  });
+$(document).ready(function() {
+  // Only apply niceSelect to selects WITHOUT .no-nice
+  $('select').not('.no-nice').niceSelect();
 });
+
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+     const profileBtn = document.getElementById("profileBtn");
+     const dropdownMenu = document.getElementById("dropdownMenu");
+
+     profileBtn.addEventListener("click", function (e) {
+       e.stopPropagation();
+       dropdownMenu.classList.toggle("show");
+     });
+
+     document.addEventListener("click", function () {
+       dropdownMenu.classList.remove("show");
+     });
+   });
 
 
 </script>
 
-    <!-- Scripts -->
-   <!-- jQuery (must load first) -->
+<!-- Scripts -->
+<!-- jQuery (must load first) -->
 <!-- jQuery (must load first) -->
 <script src="{% static 'web/js/jquery-3.3.1.min.js' %}"></script>
 
